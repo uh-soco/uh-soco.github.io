@@ -11,16 +11,14 @@
 #     taught elsewhere, or not offered this year) — used as-is, no lookup.
 #   - neither: rendered as plain unlinked text.
 
-- header: The digital as an object for social scientific research
+- header: Digital society and politics
   courses:
     - name: Algorithmic systems and Society
+      url: https://opetus.mante.li/algorithmicsystems/
     - name: Politics in Human-Computer Interaction
       code: COS-D421
-    - name: Human-Computer Interaction and Social Psychology
-    - name: Digital ethics
-    - name: Social media
 
-- header: Computational methods for social sciences
+- header: Digital and computational methods
   courses:
     - name: Computational Thinking, Programming and Social sciences
       code: COS-D430
@@ -30,7 +28,11 @@
       code: COS-D436
     - name: Interactive systems for social scientists
       code: COS-R431
-    - name: Simulations for social scientists
     - name: Collecting digital data for social scientists
+      code: COS-R436
     - name: (Social) Theory and (Social) Data Science
       code: COS-D440
+    - name: Large Language Models for Social Sciences
+      code: COS-R444
+    - name: Computational Methods in Research on Social, Political, and Economic Issue
+      url: https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintotiedot/opintojaksot/otm-80bfeef0-5307-4823-ad5f-f77f5f911c55

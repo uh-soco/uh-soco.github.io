@@ -531,7 +531,7 @@ main.wrapper {
 
 .course-list li,
 .publication-list li {
-  padding: var(--ds-spacing-small) 0;
+  padding-bottom: var(--ds-spacing-2xSmall);
 }
 
 .publication-list--bordered li {
