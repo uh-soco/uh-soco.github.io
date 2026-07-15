@@ -62,14 +62,24 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 /*
  * University of Helsinki logo lockup (crest + "UNIVERSITY OF HELSINKI"
  * wordmark), reused in the header and footer — see _includes/uh-logo.html.
- * Modeled on the real lockup at https://www.helsinki.fi/en: in the header
- * the crest sits left of a 2-line stacked wordmark; in the footer the
- * crest sits above a single-line wordmark. Both are uppercase/bold.
+ * Follows the official brand book
+ * (https://www.helsinki.fi/en/brand-book/brand-and-logo): the emblem is
+ * used in black on light surfaces and white (negative) on dark/photo
+ * surfaces, never any other colour, and is "almost exclusively" paired
+ * with the wordmark rather than shown alone. The vertical arrangement
+ * (wordmark centred under the emblem) is the basic/primary format — used
+ * here in the footer — and the horizontal arrangement (emblem beside the
+ * wordmark) is explicitly the sanctioned exception "when there is
+ * insufficient space for a vertical flame logo", which is exactly the
+ * header nav bar's situation. The brand book also specifies the gap
+ * between emblem and wordmark as "the width of one of the squares in the
+ * emblem" — the emblem's corner squares are 96 of 1000 viewBox units
+ * (assets/images/uh-logo.svg), i.e. ~9.6% of the emblem's rendered size,
+ * which the --uh-logo-gap custom property below approximates.
  */
 .uh-logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--ds-spacing-2xSmall);
   text-decoration: none;
   color: inherit;
 }
@@ -92,11 +102,13 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 
 .uh-logo--header {
   color: var(--ds-textColor-default);
+  --uh-logo-size: 28px;
+  gap: calc(var(--uh-logo-size) * 0.096);
 }
 
 .uh-logo--header .uh-logo__mark {
-  width: 28px;
-  height: 28px;
+  width: var(--uh-logo-size);
+  height: var(--uh-logo-size);
 }
 
 .uh-logo--header .uh-logo__text {
@@ -204,16 +216,19 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 .uh-logo--footer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* Brand book: in the vertical (basic) format the wordmark is centred
+     under the emblem, not left-aligned. */
+  align-items: center;
   justify-content: center;
-  gap: var(--ds-spacing-2xSmall);
+  --uh-logo-size: 3.5rem;
+  gap: calc(var(--uh-logo-size) * 0.096);
   color: var(--ds-palette-white);
 }
 
 .uh-logo--footer .uh-logo__mark {
   /* Sized to roughly match the height of the three text lines beside it. */
-  width: 3.5rem;
-  height: 3.5rem;
+  width: var(--uh-logo-size);
+  height: var(--uh-logo-size);
 }
 
 .uh-logo--footer .uh-logo__text {

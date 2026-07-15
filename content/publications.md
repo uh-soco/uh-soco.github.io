@@ -11,8 +11,8 @@ nav_order: 4
 <ul class="publication-list" id="publication-list">
 {% for pub in publications %}
   <li{% if forloop.index0 >= page_size %} class="is-hidden" hidden{% endif %}>
-    <ds-link ds-href="{{ pub.url }}" ds-text="{{ pub.title }}" ds-weight="semibold"></ds-link>{% if pub.venue %}: {{ pub.venue }}{% endif %}{% if pub.year %} ({{ pub.year }}){% endif %}
-    {% if pub.authors %}<span class="badge-row">{% for author in pub.authors %}<ds-badge ds-text="{{ author }}" ds-variant="default"></ds-badge>{% endfor %}</span>{% endif %}
+    <ds-link ds-href="{{ pub.url }}" ds-text="{{ pub.title | escape }}" ds-weight="semibold"></ds-link>{% if pub.venue %}: {{ pub.venue }}{% endif %}{% if pub.year %} ({{ pub.year }}){% endif %}
+    {% if pub.authors %}<span class="badge-row">{% for author in pub.authors %}<ds-badge ds-text="{{ author | escape }}" ds-variant="default"></ds-badge>{% endfor %}</span>{% endif %}
   </li>
 {% endfor %}
 </ul>

@@ -32,7 +32,7 @@
             <li class="site-nav__item">
               <ds-link
                 ds-href="{{ item.url | relative_url }}"
-                ds-text="{{ item.title }}"
+                ds-text="{{ item.title | escape }}"
                 ds-variant="standalone"
                 ds-weight="semibold"
                 ds-icon-hidden="true"
@@ -52,7 +52,7 @@
                   {% assign sub_items = group.items | sort: "path" %}
                   {% for item in sub_items %}
                     <ds-action-list-item
-                      ds-label="{{ item.title }}"
+                      ds-label="{{ item.title | escape }}"
                       data-url="{{ item.url | relative_url }}"
                     ></ds-action-list-item>
                   {% endfor %}

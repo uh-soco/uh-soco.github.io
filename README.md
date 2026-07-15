@@ -42,6 +42,20 @@ pick up this context's CSS color — an `<img>`-referenced SVG can't see page
 CSS, which is why it first rendered invisible (black-on-black) in the dark
 footer.
 
+Checked against the official rules at
+https://www.helsinki.fi/en/brand-book/brand-and-logo: emblem colour is
+black on light surfaces / white (negative) on dark or photo surfaces only,
+never any other colour or used alone without the wordmark; the vertical
+arrangement (wordmark centred under the emblem) is the "basic format" —
+used here in the footer; the horizontal arrangement (emblem beside the
+wordmark) is explicitly the sanctioned exception "when there is
+insufficient space for a vertical flame logo" — used here in the header
+nav bar, which is exactly that situation. The brand book also specifies
+the emblem-to-wordmark gap as "the width of one of the squares in the
+emblem"; `.uh-logo`'s `--uh-logo-size`/gap `calc()` approximates that from
+the emblem's actual square proportions in the SVG path (corner squares are
+96 of 1000 viewBox units, ~9.6%).
+
 ## Structure
 
 ### Content & navigation

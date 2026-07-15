@@ -17,7 +17,7 @@ computational and digital research methods.
   {% for course in section.courses %}
     <li>
       {% if course.code %}<span class="course-code">{{ course.code }}</span>{% endif %}
-      {% if course.url %}<ds-link ds-href="{{ course.url }}" ds-text="{{ course.name }}" ds-weight="semibold"></ds-link>{% else %}{{ course.name }}{% endif %}
+      {% if course.url %}<ds-link ds-href="{{ course.url }}" ds-text="{{ course.name | escape }}" ds-weight="semibold"></ds-link>{% else %}{{ course.name }}{% endif %}
       {% if course.start_date %}<br>{{ course.start_date }} &ndash; {{ course.end_date }}{% endif %}
     </li>
   {% endfor %}

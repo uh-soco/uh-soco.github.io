@@ -39,7 +39,7 @@ nav_order: 0
       {% assign recent_posts = site.data.blog_posts | slice: 0, 5 %}
       {% for post in recent_posts %}
         <li>
-          <ds-link ds-href="{{ post.url }}" ds-text="{{ post.title }}" ds-weight="semibold"></ds-link>
+          <ds-link ds-href="{{ post.url }}" ds-text="{{ post.title | escape }}" ds-weight="semibold"></ds-link>
           <br><small>{{ post.date }}</small>
           <p>{{ post.description }}</p>
         </li>
@@ -54,8 +54,8 @@ nav_order: 0
       {% assign recent_publications = site.data.publications | sort: "date" | reverse | slice: 0, 5 %}
       {% for pub in recent_publications %}
         <li>
-          <ds-link ds-href="{{ pub.url }}" ds-text="{{ pub.title }}" ds-weight="semibold"></ds-link>{% if pub.venue %}: {{ pub.venue }}{% endif %}{% if pub.year %} ({{ pub.year }}){% endif %}
-          {% if pub.authors %}<span class="badge-row">{% for author in pub.authors %}<ds-badge ds-text="{{ author }}" ds-variant="default"></ds-badge>{% endfor %}</span>{% endif %}
+          <ds-link ds-href="{{ pub.url }}" ds-text="{{ pub.title | escape }}" ds-weight="semibold"></ds-link>{% if pub.venue %}: {{ pub.venue }}{% endif %}{% if pub.year %} ({{ pub.year }}){% endif %}
+          {% if pub.authors %}<span class="badge-row">{% for author in pub.authors %}<ds-badge ds-text="{{ author | escape }}" ds-variant="default"></ds-badge>{% endfor %}</span>{% endif %}
         </li>
       {% endfor %}
       </ul>
