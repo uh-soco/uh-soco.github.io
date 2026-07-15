@@ -6,27 +6,10 @@ description: Courses taught by the Helsinki Social Computing Group, at the Unive
 nav_order: 5
 ---
 
-We teach both at University of Helsinki and Aalto University on various
-courses focused on digital society and its substantial questions and
+We teach various courses focused on digital society and its substantial questions and
 computational and digital research methods.
 
-{% for section in site.data.teaching %}
-<section class="course-section">
-  <h2>{{ section.header }}</h2>
-  <ul class="course-list">
-  {% for course in section.courses %}
-    <li>
-      {% if course.url %}<ds-link ds-href="{{ course.url }}" ds-text="{{ course.name | escape }}" ds-weight="semibold"></ds-link>{% else %}{{ course.name }}{% endif %}
-      {% if course.start_date %}&nbsp;(last teaching time: {{ course.start_date }} &ndash; {{ course.end_date }}){% endif %}
-    </li>
-  {% endfor %}
-  </ul>
-</section>
-{% endfor %}
-
-<!-- The two sections below are copied as plain text from
-     https://www.helsinki.fi/en/researchgroups/social-computing/teaching —
-     edit freely, they are not pulled from any data file. -->
+{% include course-list.html sections=site.data.teaching %}
 
 ## Impact beyond Helsinki area
 

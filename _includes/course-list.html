@@ -1,0 +1,14 @@
+{% assign today = 'now' | date: '%Y-%m-%d' %}
+{% for section in include.sections %}
+<section class="course-section">
+  <h2>{{ section.header }}</h2>
+  <ul class="course-list">
+  {% for course in section.courses %}
+    <li>
+      {% if course.url %}<ds-link ds-href="{{ course.url }}" ds-text="{{ course.name | escape }}" ds-weight="semibold"></ds-link>{% else %}{{ course.name }}{% endif %}
+      {% if course.start_date %}{% if today > course.start_date %}&nbsp;(last teaching time: {{ course.start_date }} &ndash; {{ course.end_date }}){% else %}&nbsp;(next teaching time: {{ course.start_date }} &ndash; {{ course.end_date }}){% endif %}{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+</section>
+{% endfor %}
