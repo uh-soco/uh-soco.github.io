@@ -106,10 +106,6 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 }
 
 .uh-logo--header {
-  /* Icon-only in the header, by request — coloured rather than the brand
-     book's black/white/silver, so this is a deliberate departure from
-     strict brand-book usage for this context. */
-  color: rgb(229, 5, 58);
   --uh-logo-size: 28px;
 }
 

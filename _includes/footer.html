@@ -1,15 +1,10 @@
 <footer class="site-footer">
   <div class="wrapper site-footer__wrapper">
+    {% include uh-logo.html class="uh-logo--footer" %}
     <div class="site-footer__text">
       <p class="site-footer__line site-footer__line--primary">Social Computing</p>
       <p class="site-footer__line">Centre for Social Data Science</p>
       <p class="site-footer__line">Faculty of Social Science, University of Helsinki</p>
-      <p class="site-footer__links">
-        <ds-link ds-href="{{ site.source_url }}" ds-text="Original group page at helsinki.fi" ds-colour="white"></ds-link>
-        &middot;
-        <ds-link ds-href="{{ '/feed/publications.xml' | relative_url }}" ds-text="RSS" ds-colour="white"></ds-link>
-      </p>
     </div>
-    {% include uh-logo.html class="uh-logo--footer" %}
   </div>
 </footer>
