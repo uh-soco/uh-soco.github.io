@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Methodological development
+title: Method development
 permalink: /methods/
 description: Methods work by the Helsinki Social Computing Group, at the intersection of computational methods, human-computer interaction and social sciences.
 nav_order: 3

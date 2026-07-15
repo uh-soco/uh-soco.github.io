@@ -18,16 +18,16 @@ nav_order: 0
 
   <p>Helsinki Social Computing is an interdisciplinary research group focused on
   computers and social science. Our work spans across political science,
-  human-computer interaction, design, and data science. We study both **the role of computers in our society** – the substance – and **means to conduct digital and computational** research in social science – the methods</p>
+  human-computer interaction, design, and data science. We study both <span class="highlight">the role of computers in our society</span> – the substance – and <span class="highlight">means to conduct digital and computational</span> research in social science – the methods</p>
 
   <ds-grid ds-container="true" ds-type="grid" ds-columns-desktop="3" ds-columns-tablet="2" ds-columns-mobile="1" class="link-box-list">
-    <ds-card ds-heading="Research projects" ds-url="{{ '/research/' | relative_url }}" ds-link-type="full">
+    <ds-card ds-heading="Research" ds-url="{{ '/research/' | relative_url }}" ds-link-type="full">
       <img slot="image" src="{{ '/assets/images/home/link-projects.webp' | relative_url }}" alt="">
     </ds-card>
     <ds-card ds-heading="People" ds-url="{{ '/people/' | relative_url }}" ds-link-type="full">
       <img slot="image" src="{{ '/assets/images/home/link-people.webp' | relative_url }}" alt="">
     </ds-card>
-    <ds-card ds-heading="Methods renewal" ds-url="{{ '/methods/' | relative_url }}" ds-link-type="full">
+    <ds-card ds-heading="Method development" ds-url="{{ '/methods/' | relative_url }}" ds-link-type="full">
       <img slot="image" src="{{ '/assets/images/home/link-methods.webp' | relative_url }}" alt="">
     </ds-card>
   </ds-grid>

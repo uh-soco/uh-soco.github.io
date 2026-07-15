@@ -233,6 +233,12 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 }
 
 /* Page content */
+
+.highlight {
+  color: var(--ds-palette-mainBlue-50);
+  font-weight: var(--ds-fontWeight-semibold);
+}
+
 main.wrapper {
   padding-top: var(--ds-spacing-layout-small);
   padding-bottom: var(--ds-spacing-layout-medium);
@@ -412,6 +418,10 @@ main.wrapper {
 
 .focus-area__text {
   flex: 1 1 20rem;
+}
+
+.focus-area__text h2 {
+  text-transform: uppercase;
 }
 
 @media (max-width: 45rem) {

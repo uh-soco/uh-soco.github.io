@@ -1,8 +1,3 @@
-# Source: https://www.helsinki.fi/en/researchgroups/social-computing/projects
-# `slug` is the cross-reference key used by _data/people.yaml
-# (`focus_areas: [slug, ...]` per person) and _data/projects.yaml
-# (`focus_area: slug` per project) — rename it here and update both files
-# to match if you ever rename a focus area.
 - name: Digital society and politics
   slug: digital-society
   image: /assets/images/projects/digital-society-and-politics.webp

@@ -5,9 +5,8 @@ permalink: /research/
 nav_order: 2
 ---
 
-Our work spans two focus areas — the societal role of digital
-technologies, and the computational methods used to study them. Below,
-each focus area is followed by the projects currently underway within it.
+Our research and impact spans across focus areas.
+Below, each focus area is followed by the projects currently underway within it.
 
 {% for area in site.data.focus_areas %}
 {% assign area_projects = site.data.projects | where: "focus_area", area.slug %}
@@ -41,7 +40,7 @@ each focus area is followed by the projects currently underway within it.
     </p>
     <p>{{ project.description }}</p>
   </article>
-  {% unless forloop.last %}<ds-divider ds-padding="none"></ds-divider>{% endunless %}
   {% endfor %}
 </section>
+{% unless forloop.last %}<ds-divider ds-padding="none"></ds-divider>{% endunless %}
 {% endfor %}
