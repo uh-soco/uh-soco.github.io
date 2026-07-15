@@ -411,7 +411,7 @@ main.wrapper {
 .people-grid img[slot="image"] {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: contain;
+  object-fit: cover;
   background: var(--ds-palette-black-05);
 }
 
