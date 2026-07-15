@@ -6,6 +6,7 @@ nav_order: 0
 ---
 
 <div class="home">
+
   <section class="hero">
     <img class="hero__image" src="{{ '/assets/images/home/hero.webp' | relative_url }}" alt="">
     <div class="hero__scrim"></div>
@@ -17,9 +18,7 @@ nav_order: 0
 
   <p>Helsinki Social Computing is an interdisciplinary research group focused on
   computers and social science. Our work spans across political science,
-  human-computer interaction, design, and data science. We contribute both on
-  the substance &ndash; the role of computers in our society &ndash; and
-  methods &ndash; means to use digitalization in social science research.</p>
+  human-computer interaction, design, and data science. We study both **the role of computers in our society** – the substance – and **means to conduct digital and computational** research in social science – the methods</p>
 
   <ds-grid ds-container="true" ds-type="grid" ds-columns-desktop="3" ds-columns-tablet="2" ds-columns-mobile="1" class="link-box-list">
     <ds-card ds-heading="Research projects" ds-url="{{ '/research/' | relative_url }}" ds-link-type="full">
@@ -51,7 +50,7 @@ nav_order: 0
 
     <div class="home-column">
       <h2>Recent publications</h2>
-      <ol class="publication-list">
+      <ul class="publication-list">
       {% assign recent_publications = site.data.publications | sort: "date" | reverse | slice: 0, 5 %}
       {% for pub in recent_publications %}
         <li>
@@ -59,11 +58,8 @@ nav_order: 0
           {% if pub.authors %}<span class="badge-row">{% for author in pub.authors %}<ds-badge ds-text="{{ author }}" ds-variant="default"></ds-badge>{% endfor %}</span>{% endif %}
         </li>
       {% endfor %}
-      </ol>
+      </ul>
       <p><ds-link ds-href="{{ '/publications/' | relative_url }}" ds-text="All publications" ds-icon="arrow-outward"></ds-link></p>
     </div>
   </ds-grid>
-
-  <p><small>Adapted from the group's page at
-  <ds-link ds-href="{{ site.source_url }}" ds-text="helsinki.fi"></ds-link>.</small></p>
 </div>
