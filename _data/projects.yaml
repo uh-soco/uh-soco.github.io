@@ -1,0 +1,31 @@
+- name: Interrogating the politics of information systems
+  description: 'The power of information systems, such as algorithms and platforms, has been a hot topic in social science discussions this decade. Research has focused particularly on case studies and interview methods. However, these methods have left various discussions and considerations that take place during the design and construction of information systems invisible to research. Using speculative and co-design methods, we create situations in which we can observe these discussions and reflections and better understand different ideologies and ways of justification: however, a single implementation method must be chosen for the information system. Based on the project, we will consider more broadly the use of speculative interview methods and experimentally created co-design situations as a research method for the digitalization of society.'
+  funder: 'Kone Foundation'
+  start_year: 2020
+  end_year: null
+  focus_area: digital-society
+- name: What kind of ways of knowing do LLMs advocate for qualitative content analysis and how to make them more diverse?
+  description: The project investigates how large language models (LLMs) are reshaping qualitative research in the social sciences. While LLMs are increasingly used for tasks including coding analyzing text. Researchers worry that these tools may introduce bias, overlook context, or narrow the diversity of scholarly perspectives.We examines how current LLM practices align with different “ways of knowing” in qualitative work—ranging from critical traditions like feminism or Marxism to more formal, observational approaches. It asks how value biases in models affect analysis, whether LLMs can support interpretive methods, and how they might be adapted to better reflect the diversity of social‑science epistemologies.
+  funder: 'Finnish Cultural Foundation'
+  start_year: 2026
+  end_year: null
+  focus_area: dcm
+- name: Lobbying on social media
+  description: Lobbyists can have a lot of influence in political decision-making. That is why it is important to know who is lobbying, how and what effects lobbying has. Traditionally, lobbying has mostly taken place hidden from the public, but now social media – especially Twitter – has become a new tool and channel for lobbying. Work done together with Juho Vesa and his team.
+  funder: 'Kone Foundation'
+  start_year: 2023
+  end_year: 2027
+  focus_area: dcm
+- name: DARIAH infrastructure
+  description: We work to develop the Finnish research infrastructure for data intensive social science and humanities , with a focus on visual analysis and Finnish online content collection.
+  funder: 'Research Council of Finland'
+  start_year: 2022
+  end_year: 2024
+  focus_area: dcm
+- name: Kuvallisen median laskennallisen analyysin välineet
+  description: The role of images and visual material has grown in both journalistically produced media and social media services. In order to remain relevant in the changed communication environment, communication researchers must also take the visual perspective of these materials into account more broadly in their work. On the other hand, visual material on social media can also create a rich foundation for photojournalism and storytelling through images. However, research on visual communication is currently largely based on qualitative analysis. A purely qualitative approach ignores the growing role of big data in social science research. Content analysis of images can also be done with the help of computers, for example, using Google's Vision AI service. When it comes to image recognition services, uncertainty arises from the fact that different image recognition services interpret images and their content in very different ways. The project is developing tools and metrics to measure
+    these uncertainties.
+  funder: ''
+  start_year: 2020
+  end_year: 2021
+  focus_area: dcm

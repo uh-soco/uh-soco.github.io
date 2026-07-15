@@ -1,0 +1,79 @@
+# Source: https://www.helsinki.fi/en/researchgroups/social-computing/people
+- name: Anton Berg
+  image: /assets/images/people/anton-berg.webp
+  description: Anton Berg is a doctoral researcher at the Helsinki Institute of Humanities and Social Sciences under the University of Helsinki. He is also part of the Mediatized Religious Populism project (MERELPO), funded by the Academy of Finland. Berg examines the connections between religion and datafication — especially phenomena such as religious populism on hybrid media platforms. His background is in religious studies, digital humanities and cognitive science. At Helsinki Social Computing Group, Berg examined the validity of computational image analysis tools.
+  alumni: false
+  orcid: 0000-0001-7143-762X
+  focus_areas:
+    - dcm
+- name: Felix Epp
+  image: /assets/images/people/felix-epp.jpg
+  description: Felix Anand Epp is a postdoctoral researcher in the Digital Ideologies project with a background in design and human-computer interaction. His interdisciplinary research revolves around interactive digital technologies and how they shape social practices. He primarily uses qualitative and designerly methods, like research through design, ethnography and codesign, to explore embodied experiences and technology-mediated interactions in people's lives. Felix's doctoral research investigated wearable technologies for augmenting appearance and how they shape our clothing and social practices. At Aalto University, he also develops methods that incorporate future thinking in design and technology innovation.
+  alumni: false
+  orcid: 0000-0001-6252-7244
+  focus_areas:
+    - digital-society
+- name: Jesse Haapoja
+  image: ''
+  description: Jesse Haapoja is a postdoctoral researcher in the Digital Ideologies -project with a background in social psycholgy. Jesse has a broad interest towards questions arising when individuals are increasingly becoming users of different types of digital services and software and these user roles become enmeshed with their daily lives. Working mainly with qualitative methods, he has focused in his work in different types of encounters humans have with algorithmic systems. His PhD dissertation used game metaphor as an analytical lens to study said encounters.
+  alumni: false
+  orcid: 0000-0001-6877-7957
+  focus_areas:
+    - digital-society
+- name: Matti Nelimarkka
+  image: '/assets/images/people/matti-nelimarkka.webp'
+  description: Matti Nelimarkka is a political scientist with a background in computer science or a computer scientist who knows a bit how society works. His scholarly work focuses on digital and computational methods in social sciences, especially looking at the practices, reliability, and validity of these in social science. He applies digital, computational and increasingly design-based methods in political science and democracy related themes.
+  alumni: false
+  orcid: 0000-0001-9867-692X
+  focus_areas:
+    - digital-society
+    - dcm
+- name: Otso Rajala
+  image: /assets/images/people/otso-rajala.jpg
+  description: Otso Rajala is a doctoral researcher at the Faculty of Social Sciences, University of Helsinki. His dissertation examines the development of language used in debates and deliberation in the Finnish Parliament. Otso's academic background is in social sciences and research methods, and he has professional experience with databases and data pipelines where the most interesting challenges arise in working with textual data, especially free text.
+  alumni: false
+  orcid: ''
+  focus_areas:
+    - dcm
+- name: Robin Forsberg
+  image: /assets/images/people/robin-forsberg.jpg
+  description: Robin Forsberg is a doctoral researcher at the Centre for Social Data Science, University of Helsinki. In his dissertation, he studies biases in various text analytics (natural language processing) methods. Furthermore, Robin is interested in machine learning and responsible artificial intelligence. He holds a Master of Science in Economics and has a professional background in data science and engineering, working for various tech companies.
+  alumni: false
+  orcid: 0009-0001-7496-5353
+  focus_areas:
+    - dcm
+- name: Sofia Heikkonen
+  image: /assets/images/people/sofia-heikkonen.jpg
+  description: 'Sofia Heikkonen is a doctoral researcher at the Faculty of Law in the University of Helsinki. Her dissertation work examines the role and legal effects of digital materials used by the state for legally relevant function. Her background is in national and EU public law. She is also part of The Automated Administration: Governance of ADM in the public sector and Digital Administration Redesigned for Everyone research projects at the Legal Tech Lab in the Faculty of Law .'
+  alumni: false
+  orcid: 0009-0002-8949-2517
+  focus_areas:
+    - digital-society
+- name: Anita Braida
+  image: /assets/images/people/anita-braida.jpg
+  description: Anita Braida is a Master’s student in the Linguistic Diversity and Digital Humanities programme, following the Language Technology track. She joined the Helsinki Social Computing Group as a trainee for the FIN-CLARIAH project. Anita has a BSc in Cognitive Science and Artificial Intelligence.
+  alumni: true
+- name: Denis Davydov
+  image: /assets/images/people/denis-davydov.jpg
+  description: Denis Davydov is currently pursuing a master's degree in Data Science, building on a solid foundation in mathematics. His passion lies in leveraging his skills to address social and environmental challenges. Denis is deeply immersed in the world of AI and data science, constantly exploring new avenues to make a meaningful impact. At present, Denis is part of the social computing group at the University of Helsinki, where he is developing web scrapers to aid in data collection for social research. This experience is not only honing his technical abilities but also aligning perfectly with his goal of using data for the greater good.
+  alumni: true
+- name: Irina Hasala
+  image: ''
+  description: Irina Hasala is a student in the Master's Programme Politics, Media and Communication and a research assistant at the Social Computing group. She is working on her Master’s thesis concerning political discussion on social media for the group’s project Interrogating the politics of information systems. Her previous background is in news media, having completed a BA in journalism at the University of Jyväskylä and working for several years at newspapers such as Helsingin Sanomat. She is broadly interested in the future of public discussion online and social media’s implications on it.
+  alumni: true
+- name: Onni Aarne
+  image: /assets/images/people/onni-aarne.webp
+  description: Onni Aarne is a data science MSc student at the University of Helsinki, with a BSc in computer science. He is currently working with Long Play to bring algorithmic accountability reporting to Finland, and writing his master's thesis about that work. Ultimately, he is most interested in understanding the long-term impacts of AI systems on society, and how we could make sure that those impacts are positive. Previously he has worked on analyzing academic fields through analysis of publication networks, and applications of explainable AI to regulatory compliance.
+  alumni: true
+- name: Leonardo Negri
+  image: /assets/images/people/leonardo-negri.jpg
+  description: Leonardo Negri is an international degree student in the Master's Programme in Particle Physics and Astrophysical Sciences. He perviously worked at the Aerosol Physics Laboratory at Tampere University, where he earned his Bachelor’s Degree in Science and Engineering. He is interested in science communication, and wants to contribute to the Social Computing Group’s research using his previous experience as a physicist and programmer. His interest is in understanding the role of computation, algorithms and social media in shaping public opinion, and their impacts on effectively publicising science.
+  alumni: true
+- name: Sippo Rossi
+  image: /assets/images/people/sippo-rossi.webp
+  description: Sippo Rossi is a visiting doctoral researcher from Copenhagen Business School. His research focuses on misinformation and the negative societal effects of social media, and he has recently been working on projects related to social bots and AI-generated social media content. Sippo has a BSc and MSc in Economics and Business Administration from Aalto University.
+  alumni: true
+- name: Victoria Palacin
+  image: /assets/images/people/victoria-palacin.webp
+  description: Dr. Victoria Palacin is a researcher and technologist specialized in digital participation for sustainable development. Her current research focuses on understanding the unconscious ideologies that guide the design of digital democracy tools. This work is being done through the systematic deconstruction of digital platforms for public participation, and through participatory interventions with communities. She advances this work as a postdoctoral researcher at the University of Helsinki, and as a visiting fellow at Digital Curation Institute of the University of Toronto. Previously she has been a fellow researcher at the MIT Center for Civic Media and at the UN Digital Government Division. Where she has worked on developing data experiences and examining the participatory affordances of hackathons and e-democracy tools. In her doctoral thesis, Victoria explored the link between online participation and human motives in digital citizen science platforms. Before her doctorate, Victoria was awarded an Erasmus Mundus scholarship to specialize in sustainability and computation (Pervasive Computing for Sustainable Development). During this programme Victoria developed a deep interest in computational methods to study online participation as a way to build livable, sustainable, and participatory futures, these drove her to pursue her doctoral studies and to her current research work. Victoria Palacin on Twitter
+  alumni: true

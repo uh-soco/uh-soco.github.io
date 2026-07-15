@@ -1,0 +1,36 @@
+title: Social Computing
+description: >-
+  Helsinki Social Computing Group is an interdisciplinary research group
+  focused on computers and social science, integrating political science,
+  human-computer interaction, design and data science.
+baseurl: ""
+url: ""
+
+author: Helsinki Social Computing Group
+contact_address: "P.O. Box 3 (Fabianinkatu 33), 00014 University of Helsinki"
+contact_phone: "+358 (0) 2941 911"
+source_url: "https://www.helsinki.fi/en/researchgroups/social-computing"
+
+teacher_name: "Matti Nelimarkka"
+
+# University of Helsinki Design System component library, loaded from
+# Datacloud (the no-build-step distribution channel) — see
+# https://designsystem.helsinki.fi/2de013a32/p/574a88-developers
+# Datacloud only serves pinned, dash-separated versions (no "latest" alias),
+# so bump this by hand when upgrading.
+ds_version: "1-7-0"
+ds_cdn_base: "https://s3.datacloud.helsinki.fi/uhds:uh-design-system/public/component-library"
+
+markdown: kramdown
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - README.md
+  - node_modules
+  - vendor
+  - .bundle

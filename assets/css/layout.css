@@ -1,0 +1,522 @@
+/*
+ * Page composition only. Component styling itself comes from the real
+ * University of Helsinki Design System component library, loaded in
+ * _layouts/default.html from Datacloud — see
+ * https://designsystem.helsinki.fi/2de013a32/p/574a88-developers
+ * component-library.css already defines every --ds-* custom property at
+ * :root, so this file only reuses them; it does not redeclare tokens.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; display: block; }
+
+body {
+  font-family: var(--ds-fontFamily-body);
+  font-size: var(--ds-fontSize-16);
+  line-height: var(--ds-lineHeight-large);
+  color: var(--ds-textColor-default);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ds-fontFamily-heading);
+  font-weight: var(--ds-fontWeight-bold);
+  color: var(--ds-textColor-default);
+  margin: 0 0 var(--ds-spacing-small) 0;
+}
+
+h1 { font-size: var(--ds-fontSize-36); }
+h2 { font-size: var(--ds-fontSize-24); margin-top: var(--ds-spacing-large); }
+h3 { font-size: var(--ds-fontSize-18); font-weight: var(--ds-fontWeight-semibold); }
+
+p { margin: 0 0 var(--ds-spacing-small) 0; }
+
+.wrapper {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 var(--ds-spacing-medium);
+}
+
+/* Header & nav */
+.site-header {
+  border-bottom: var(--ds-borderWidth-thin) solid var(--ds-textColor-default);
+}
+
+.site-header__wrapper {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: var(--ds-spacing-small) var(--ds-spacing-medium);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-small);
+}
+
+.site-header__brand-group {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xSmall);
+}
+
+/*
+ * University of Helsinki logo lockup (crest + "UNIVERSITY OF HELSINKI"
+ * wordmark), reused in the header and footer — see _includes/uh-logo.html.
+ * Modeled on the real lockup at https://www.helsinki.fi/en: in the header
+ * the crest sits left of a 2-line stacked wordmark; in the footer the
+ * crest sits above a single-line wordmark. Both are uppercase/bold.
+ */
+.uh-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xSmall);
+  text-decoration: none;
+  color: inherit;
+}
+
+.uh-logo__mark {
+  display: block;
+  flex-shrink: 0;
+}
+
+.uh-logo__text {
+  display: flex;
+  font-weight: var(--ds-fontWeight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.uh-logo__text-line {
+  white-space: nowrap;
+}
+
+.uh-logo--header {
+  color: var(--ds-textColor-default);
+}
+
+.uh-logo--header .uh-logo__mark {
+  width: 28px;
+  height: 28px;
+}
+
+.uh-logo--header .uh-logo__text {
+  flex-direction: column;
+  line-height: 1.1;
+  font-size: var(--ds-fontSize-12);
+}
+
+@media (max-width: 30rem) {
+  .uh-logo--header .uh-logo__text {
+    display: none;
+  }
+}
+
+.site-header__brand {
+  font-family: var(--ds-fontFamily-heading);
+  font-weight: var(--ds-fontWeight-bold);
+  font-size: var(--ds-fontSize-20);
+  color: var(--ds-textColor-default);
+  text-decoration: none;
+}
+
+/*
+ * ds-button's own scoped host styles (.sc-ds-button-h.ds-button__*__host)
+ * carry higher specificity than a single page-level class, so beating them
+ * to show/hide the mobile toggle needs !important.
+ */
+.site-nav__mobile-toggle {
+  display: none !important;
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-medium);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__link.is-active {
+  box-shadow: inset 0 -3px 0 var(--ds-textColor-link);
+}
+
+@media (max-width: 60rem) {
+  .site-nav__mobile-toggle {
+    display: inline-flex !important;
+  }
+
+  .site-nav__list {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-top: var(--ds-spacing-small);
+  }
+
+  .site-nav__list.is-open {
+    display: flex;
+  }
+
+  .site-header__wrapper {
+    align-items: flex-start;
+  }
+}
+
+/* Footer */
+.site-footer {
+  margin-top: var(--ds-spacing-layout-large);
+  padding: var(--ds-spacing-large) 0;
+  background: var(--ds-palette-black);
+  color: var(--ds-palette-white);
+}
+
+.site-footer__wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-large);
+}
+
+.site-footer__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.site-footer__line {
+  margin: 0;
+  font-size: var(--ds-fontSize-16);
+  color: var(--ds-palette-white);
+}
+
+.site-footer__line--primary {
+  font-size: var(--ds-fontSize-18);
+  font-weight: var(--ds-fontWeight-bold);
+}
+
+.site-footer__links {
+  margin-top: var(--ds-spacing-2xSmall);
+  font-size: var(--ds-fontSize-14);
+}
+
+.uh-logo--footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--ds-spacing-2xSmall);
+  color: var(--ds-palette-white);
+}
+
+.uh-logo--footer .uh-logo__mark {
+  /* Sized to roughly match the height of the three text lines beside it. */
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.uh-logo--footer .uh-logo__text {
+  flex-direction: row;
+  gap: 0.3em;
+  font-size: var(--ds-fontSize-16);
+}
+
+@media (max-width: 35rem) {
+  .site-footer__wrapper {
+    flex-direction: column;
+  }
+
+  .uh-logo--footer {
+    align-self: flex-start;
+  }
+}
+
+/* Page content */
+main.wrapper {
+  padding-top: var(--ds-spacing-layout-small);
+  padding-bottom: var(--ds-spacing-layout-medium);
+  min-height: 40vh;
+}
+
+/* Home */
+.hero {
+  position: relative;
+  /* Break out of main.wrapper's centered max-width to go edge-to-edge. */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-bottom: var(--ds-spacing-2xLarge);
+  min-height: 26rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    rgba(0, 25, 41, 0.88) 0%,
+    rgba(0, 25, 41, 0.65) 38%,
+    rgba(0, 25, 41, 0.15) 70%,
+    rgba(0, 25, 41, 0) 100%
+  );
+}
+
+.hero__text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: var(--ds-spacing-2xLarge) var(--ds-spacing-medium);
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: var(--ds-fontSize-14);
+  font-weight: var(--ds-fontWeight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ds-palette-mainBlue-20);
+  margin-bottom: var(--ds-spacing-2xSmall);
+}
+
+.hero__text h1 {
+  font-size: var(--ds-fontSize-48);
+  line-height: 1.05;
+  color: var(--ds-palette-white);
+  max-width: 32rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.hero__subtitle {
+  font-size: var(--ds-fontSize-22);
+  font-weight: var(--ds-fontWeight-semibold);
+  color: var(--ds-palette-white);
+  max-width: 28rem;
+  margin: 0;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 45rem) {
+  .hero {
+    min-height: 22rem;
+  }
+
+  .hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 25, 41, 0.2) 0%,
+      rgba(0, 25, 41, 0.75) 55%,
+      rgba(0, 25, 41, 0.9) 100%
+    );
+  }
+
+  .hero__text {
+    padding: var(--ds-spacing-large) var(--ds-spacing-medium);
+    align-self: flex-end;
+  }
+
+  .hero__text h1 {
+    font-size: var(--ds-fontSize-36);
+  }
+}
+
+.link-box-list {
+  margin: var(--ds-spacing-2xLarge) 0;
+}
+
+.link-box-list img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.home-columns {
+  margin-top: var(--ds-spacing-2xLarge);
+  align-items: start;
+}
+
+.home-column .blog-list,
+.home-column .publication-list {
+  margin-top: var(--ds-spacing-small);
+}
+
+.blog-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-list li {
+  padding: var(--ds-spacing-small) 0;
+  border-bottom: var(--ds-borderWidth-hairline) solid var(--ds-palette-black-10);
+}
+
+.blog-list li:last-child {
+  border-bottom: none;
+}
+
+.blog-list p {
+  margin: var(--ds-spacing-3xSmall) 0 0 0;
+  font-size: var(--ds-fontSize-14);
+  color: var(--ds-palette-black-70);
+}
+
+/* People */
+.people-grid {
+  margin: var(--ds-spacing-medium) 0 var(--ds-spacing-2xLarge);
+}
+
+.people-grid img[slot="image"] {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  background: var(--ds-palette-black-05);
+}
+
+/* Projects */
+.focus-area {
+  margin: var(--ds-spacing-2xLarge) 0;
+  scroll-margin-top: var(--ds-spacing-large);
+}
+
+.focus-area__hero {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xLarge);
+  margin-bottom: var(--ds-spacing-medium);
+}
+
+.focus-area__image {
+  flex: 1 1 26rem;
+  max-width: 34rem;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1.5rem 3rem rgba(0, 25, 41, 0.2);
+}
+
+.focus-area__text {
+  flex: 1 1 20rem;
+}
+
+@media (max-width: 45rem) {
+  .focus-area__hero {
+    flex-direction: column;
+  }
+
+  .focus-area__image {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+.project {
+  margin: var(--ds-spacing-medium) 0;
+}
+
+.project-meta {
+  font-size: var(--ds-fontSize-14);
+  color: var(--ds-palette-black-70);
+}
+
+/* Small photo + name chip, e.g. focus-area researchers. Image capped at
+   50px wide per design spec, cropped into a small circle. */
+.researcher-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-2xSmall);
+  margin: var(--ds-spacing-small) 0 0 0;
+}
+
+.researcher-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-3xSmall);
+  padding: var(--ds-spacing-4xSmall) var(--ds-spacing-2xSmall) var(--ds-spacing-4xSmall) var(--ds-spacing-4xSmall);
+  border-radius: 999px;
+  background: var(--ds-palette-black-03);
+  font-size: var(--ds-fontSize-14);
+  font-weight: var(--ds-fontWeight-semibold);
+  color: var(--ds-textColor-default);
+}
+
+.researcher-chip img,
+.researcher-chip__placeholder {
+  width: 50px;
+  height: 50px;
+  max-width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.researcher-chip__placeholder {
+  background: var(--ds-palette-black-10);
+}
+
+/* Inline row of ds-badge elements, e.g. publication authors. */
+.badge-row {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-spacing-3xSmall);
+  margin: 0;
+}
+
+/* Courses & publications */
+.course-section {
+  margin: var(--ds-spacing-large) 0;
+}
+
+.course-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.publication-list {
+  margin: 0;
+  padding-left: var(--ds-spacing-medium);
+}
+
+.course-list li,
+.publication-list li {
+  padding: var(--ds-spacing-small) 0;
+}
+
+.publication-list--bordered li {
+  border-bottom: var(--ds-borderWidth-hairline) solid var(--ds-palette-black-10);
+}
+
+.publication-list--bordered li:last-child {
+  border-bottom: none;
+}
+
+.publication-list li .badge-row {
+  margin-left: var(--ds-spacing-3xSmall);
+}
+
+#load-more-publications {
+  margin-top: var(--ds-spacing-small);
+}
+
+.course-code {
+  font-family: monospace;
+  color: var(--ds-palette-black-70);
+  font-size: var(--ds-fontSize-14);
+}

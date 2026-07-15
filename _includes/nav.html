@@ -1,0 +1,67 @@
+<header class="site-header">
+  <div class="site-header__wrapper">
+    <div class="site-header__brand-group">
+      {% include uh-logo.html class="uh-logo--header" %}
+      <a class="site-header__brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    </div>
+    {% comment %}
+      Menu order is set per page via `nav_order` in front matter (lower
+      sorts first; pages without it sort last). For a dropdown, the group's
+      position is set by the lowest nav_order among its items.
+      content/index.md (nav_order: 0) is included, showing as "Home".
+    {% endcomment %}
+    {% assign content_pages = site.pages | where_exp: "p", "p.path contains 'content/'" %}
+    {% assign content_pages = content_pages | sort: "nav_order" %}
+    {% assign nav_groups = content_pages | group_by_exp: "p", "p.path | remove_first: 'content/' | split: '/' | first" %}
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <ds-button
+        class="site-nav__mobile-toggle"
+        ds-text="Menu"
+        ds-icon="menu"
+        ds-icon-only="true"
+        ds-icon-aria-label="Menu"
+        ds-variant="supplementary"
+        ds-aria-expanded="false"
+        ds-aria-controls="site-nav-list"
+      ></ds-button>
+      <ul class="site-nav__list" id="site-nav-list">
+        {% for group in nav_groups %}
+          {% if group.name contains "." %}
+            {% assign item = group.items.first %}
+            <li class="site-nav__item">
+              <ds-link
+                ds-href="{{ item.url | relative_url }}"
+                ds-text="{{ item.title }}"
+                ds-variant="standalone"
+                ds-weight="semibold"
+                ds-icon-hidden="true"
+                class="site-nav__link{% if page.url == item.url %} is-active{% endif %}"
+              ></ds-link>
+            </li>
+          {% else %}
+            <li class="site-nav__item">
+              <ds-action-menu
+                ds-button-text="{{ group.name | replace: '-', ' ' | capitalize }}"
+                ds-button-variant="supplementary"
+                ds-button-colour="black"
+                ds-button-size="small"
+                ds-align="start"
+              >
+                <ds-action-list ds-role="menu">
+                  {% assign sub_items = group.items | sort: "path" %}
+                  {% for item in sub_items %}
+                    <ds-action-list-item
+                      ds-label="{{ item.title }}"
+                      data-url="{{ item.url | relative_url }}"
+                    ></ds-action-list-item>
+                  {% endfor %}
+                </ds-action-list>
+              </ds-action-menu>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>

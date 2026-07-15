@@ -1,0 +1,197 @@
+# Social Computing
+
+Jekyll site for the [Helsinki Social Computing Group](https://www.helsinki.fi/en/researchgroups/social-computing),
+built for GitHub Pages.
+
+## Design system
+
+Built on the real [University of Helsinki Design System component
+library](https://designsystem.helsinki.fi/2de013a32/p/574a88-developers)
+(`@uh-design-system/component-library`), loaded from Datacloud — the
+no-build-step distribution channel, appropriate since this is a plain Jekyll
+site with no npm build step. See `_layouts/default.html` for the three
+`<link>`/`<script>` tags (component CSS, fonts CSS, loader script) and
+`_config.yml` for the pinned `ds_version`. Datacloud only serves specific
+versions (no "latest" alias), so bumping the library means bumping
+`ds_version` by hand — check [the package on
+npm](https://www.npmjs.com/package/@uh-design-system/component-library) for
+the current release.
+
+Templates use the actual `<ds-*>` custom elements (`ds-card`, `ds-link`,
+`ds-button`, `ds-action-menu`, `ds-badge`, `ds-divider`, `ds-grid`) rather
+than hand-rolled markup — see `_includes/nav.html` and `content/people.md`.
+`assets/css/layout.css` handles page composition only (header/nav/footer
+layout, grid spacing) and reuses the `--ds-*` custom properties the
+component library already defines at `:root`; it does not redeclare any
+design tokens itself.
+
+The header and footer both carry the University of Helsinki crest +
+"UNIVERSITY OF HELSINKI" wordmark, linking to helsinki.fi
+(`_includes/uh-logo.html`, one shared markup structure styled per context
+via a `class` param — modeled on the real lockup at
+https://www.helsinki.fi/en). In the header (`uh-logo--header`) the crest
+sits left of the wordmark stacked over two lines ("UNIVERSITY" /
+"OF HELSINKI"), matching the real site; in the footer (`uh-logo--footer`)
+the crest sits above a single-line wordmark, roughly sized to the height of
+the footer's three text lines. Neither the crest nor a combined
+logo+wordmark asset is part of the public component library, so the
+crest's SVG path was extracted directly from the real site's own
+`hy-icon-hy-logo` component bundle. It's inlined as raw `<svg
+fill="currentColor">` rather than `<img src="...">`, so it can actually
+pick up this context's CSS color — an `<img>`-referenced SVG can't see page
+CSS, which is why it first rendered invisible (black-on-black) in the dark
+footer.
+
+## Structure
+
+### Content & navigation
+
+All editorial pages live under `content/`. The main menu
+(`_includes/nav.html`) is generated from that folder's layout, ordered by
+each page's `nav_order` front matter (currently Home=0, People=1,
+Research=2, Methodological development=3, Publications=4, Teaching=5 —
+edit that field to reorder; pages without it sort last):
+
+- A file directly in `content/` (e.g. `content/people.md`) becomes a
+  top-level menu link, rendered as a real `<ds-link>` anchor. This includes
+  `content/index.md` itself (the homepage), which shows up as "Home".
+- A subfolder would become a dropdown (`<ds-action-menu>`/
+  `<ds-action-list-item>`, the design system's own disclosure-menu pattern),
+  with each file inside it as a popup item — see `assets/js/nav.js` for the
+  `dsSelect`-based navigation this requires, since `ds-action-list-item` has
+  no `href` of its own. Nothing currently uses this (Research is a single
+  page, see below), but the mechanism is there if a section ever needs it.
+  `jekyll-sitemap` is enabled so pages reachable only from inside a
+  JS-driven popup would still stay crawlable.
+
+### Data
+
+- `_data/people.yaml` — group members (name, image, description, alumni
+  status, ORCID iD). Rendered on `content/people.md`, alphabetically by
+  first name, current members separate from alumni. One-off data, not
+  auto-updated. Photos are downloaded to `assets/images/people/` by
+  `scripts/download_people_images.py` (re-run by hand after changing an
+  image URL in this file). `orcid` is only populated for current members —
+  it drives publication fetching (see below) — and left blank where no
+  public ORCID record could be found (currently just Otso Rajala).
+- `_data/focus_areas.yaml` — the group's two research focus areas (name,
+  `slug`, banner image, description mirroring
+  https://www.helsinki.fi/en/researchgroups/social-computing/projects).
+  Slugs are short and simple (`digital-society`, `dcm`) — this is the
+  cross-reference key: `_data/people.yaml` lists which slugs a person
+  belongs to (`focus_areas: [slug, ...]` — e.g. Matti Nelimarkka has both),
+  and `_data/projects.yaml` tags each project with one
+  (`focus_area: slug`). Rename a slug and update it in both files to match.
+  Rendered on `content/projects.md` (served at `/research/` — see below) as
+  a hero-style block per area (large image left, heading/description/
+  researchers right — matching
+  https://www.helsinki.fi/en/researchgroups/social-computing/projects,
+  stacking to image-on-top on mobile), each with `id="{{ area.slug }}"` so
+  `/research/#dcm` links straight to a section, followed by that area's
+  projects. Researchers (current members whose `focus_areas` contains the
+  slug) show as a small photo (capped at 50px, see `.researcher-chip` in
+  `assets/css/layout.css`) + name chip, not a text badge — missing photos
+  (e.g. Jesse Haapoja) fall back to a plain grey circle. One-off data, not
+  auto-updated.
+- `_data/projects.yaml` — research projects (name, description, funder,
+  start/end year, `focus_area` slug). One-off data, not auto-updated.
+- `content/methods.md` (`/methods/`) is plain markdown, not data-driven —
+  each method is just a `##` heading, a paragraph and a couple of markdown
+  links, copied from
+  https://www.helsinki.fi/en/researchgroups/social-computing/methodological-development.
+  There used to be a `_data/methods.yaml` backing it; it was folded
+  straight into the page to make editing a method (or adding a new one) a
+  single markdown edit instead of touching two files.
+- `_data/courses.yaml` — the manually curated, editable source for the
+  Teaching page: a list of headers (currently "The digital as an object for
+  social scientific research" and "Computational methods for social
+  sciences", matching
+  https://www.helsinki.fi/en/researchgroups/social-computing/teaching), each
+  with a list of courses. A course needs a `name`, plus either a `code`
+  (University of Helsinki course code, e.g. `COS-D421` — resolved daily
+  against the course catalogue) or a direct `url` (used as-is, no lookup)
+  or neither (rendered as plain text — most of the source page's course
+  names don't map to a code we know).
+- `_data/teaching.json` — generated daily by `scripts/fetch_teaching.py`
+  (JSON, like `publications.json` and `blog_posts.json`, for consistency —
+  `_data/courses.yaml` is the only hand-edited course data), which resolves
+  every `code` in `_data/courses.yaml` against the [course search
+  API](https://studies.helsinki.fi/kurssit) (the soonest upcoming offering,
+  falling back to the most recent past one) while preserving the
+  header groups. Do not edit by hand — edit `_data/courses.yaml` instead.
+  Note: that API wraps course codes in stray `␟` separator characters
+  (e.g. `␟COS-D421␟`), so the lookup strips those before comparing.
+- `_data/publications.json` — a single JSON array, generated daily by
+  `scripts/fetch_publications.py`, which fetches from the
+  [ORCID public API](https://pub.orcid.org) for every current member with an
+  `orcid` in `_data/people.yaml`. A paper co-authored by more than one group
+  member is written once — deduplicated by DOI (falling back to a slugified
+  title for the rare work without one) — with an `authors` list naming
+  every group member found on it. Do not edit by hand. Powers the "Recent
+  publications" list on `content/index.md` (10 most recent, sorted by full
+  publication date where ORCID provides one; format:
+  "Title: Venue (Year) [Author] [Author]"), `content/publications.md` (all
+  of them, same format, 25 at a time with a "Load more" button — see
+  `assets/js/load-more.js`), and the hand-rolled RSS feed at `feed/publications.xml`
+  (`/feed/publications.xml` — a plain Liquid template over
+  `site.data.publications`, not a Jekyll collection, since there's no
+  per-publication page anymore).
+- `_data/blog_posts.json` — generated daily by `scripts/fetch_blog_posts.py`
+  from the group's Substack RSS feed
+  (https://sociallycompute.substack.com/feed — this is the actual feed
+  behind "Recent blog posts" on the source homepage; found by inspecting the
+  network requests the live site's blog widget makes, since the widget
+  itself just points at an internal Drupal block id). Do not edit by hand.
+  Powers the "Recent blog posts" column on `content/index.md` (5 most
+  recent).
+
+`content/index.md` otherwise mirrors
+https://www.helsinki.fi/en/researchgroups/social-computing directly: the
+same hero image and intro copy, the same three image link-boxes (Research
+projects / People / Methods renewal, rendered as `<ds-card>`), and — where
+the source page has "Recent blog posts" above "Recent academic
+publications" stacked vertically — a two-column `<ds-grid>` with blog posts
+and publications side by side. Images for all of this live in
+`assets/images/home/`.
+
+The hero itself (`.hero` in `assets/css/layout.css`) is full viewport width
+— it breaks out of `main.wrapper`'s centered max-width with the standard
+`width: 100vw; margin-left: calc(50% - 50vw)` trick — with the photo as a
+true background and the heading/tagline overlaid on top of a dark gradient
+scrim for contrast (a horizontal gradient on desktop, since the text sits
+on the left; a bottom-heavy vertical one on mobile, since the text stacks
+at the bottom of the image there). The source page uses a fancier `hy-hero`
+component with a colour variant that isn't part of the public component
+library, so this is a hand-styled equivalent, not a 1:1 copy.
+
+## Automation
+
+`.github/workflows/pages.yml` is the only workflow. On every push to `main`,
+on a daily schedule (04:00 UTC), and on manual dispatch, it: fetches
+publications, blog posts and teaching data fresh into the checkout, builds
+the Jekyll site with that data, and deploys the result to GitHub Pages.
+
+The fetched data is **never committed back to the repo** — it only ever
+lives in that run's build output, uploaded as the Pages deployment
+artifact. This keeps the repo's history free of daily bot commits; the
+tradeoff is that a fresh local checkout won't have current publications/
+blog posts/teaching data until you run the fetch scripts yourself (see
+below) — `site.data.publications` etc. are just empty/undefined until you
+do, which Jekyll and Liquid handle fine (empty lists, not errors).
+
+## Local development
+
+```sh
+bundle install
+bundle exec jekyll serve
+```
+
+To refresh the generated data by hand:
+
+```sh
+pip install requests pyyaml
+python scripts/fetch_publications.py
+python scripts/fetch_blog_posts.py
+python scripts/fetch_teaching.py
+python scripts/download_people_images.py  # after editing image URLs in _data/people.yaml
+```

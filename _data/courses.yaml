@@ -1,0 +1,36 @@
+# Manually curated course list for the Teaching page, organised under the
+# same headers as
+# https://www.helsinki.fi/en/researchgroups/social-computing/teaching
+#
+# Each course entry needs a `name`, plus either:
+#   - `code`: a University of Helsinki course code (e.g. COS-D421). Looked
+#     up daily by scripts/fetch_teaching.py against the course catalogue to
+#     resolve the current run's real link and dates, written to
+#     _data/teaching.yaml. Do not edit teaching.yaml by hand.
+#   - `url`: a direct link, for courses without a resolvable code (e.g.
+#     taught elsewhere, or not offered this year) — used as-is, no lookup.
+#   - neither: rendered as plain unlinked text.
+
+- header: The digital as an object for social scientific research
+  courses:
+    - name: Algorithmic systems and Society
+    - name: Politics in Human-Computer Interaction
+      code: COS-D421
+    - name: Human-Computer Interaction and Social Psychology
+    - name: Digital ethics
+    - name: Social media
+
+- header: Computational methods for social sciences
+  courses:
+    - name: Computational Thinking, Programming and Social sciences
+      code: COS-D430
+    - name: Machine learning for social scientists
+      code: COS-D435
+    - name: Network analysis for social scientists
+      code: COS-D436
+    - name: Interactive systems for social scientists
+      code: COS-R431
+    - name: Simulations for social scientists
+    - name: Collecting digital data for social scientists
+    - name: (Social) Theory and (Social) Data Science
+      code: COS-D440

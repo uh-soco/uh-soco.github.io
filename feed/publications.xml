@@ -1,0 +1,32 @@
+---
+layout: null
+permalink: /feed/publications.xml
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }} — Publications</title>
+  <subtitle>{{ site.description | strip_newlines }}</subtitle>
+  <link href="{{ '/feed/publications.xml' | absolute_url }}" rel="self" />
+  <link href="{{ '/publications/' | absolute_url }}" rel="alternate" type="text/html" />
+  <id>{{ '/feed/publications.xml' | absolute_url }}</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ site.author }}</name>
+  </author>
+  {% assign publications = site.data.publications | sort: "date" | reverse %}
+  {% for pub in publications %}
+  <entry>
+    <title type="html">{{ pub.title | xml_escape }}</title>
+    <link href="{{ pub.url }}" rel="alternate" type="text/html" />
+    <id>{% if pub.doi %}https://doi.org/{{ pub.doi }}{% else %}{{ pub.url }}{% endif %}</id>
+    <published>{{ pub.date | date_to_xmlschema }}</published>
+    <updated>{{ pub.date | date_to_xmlschema }}</updated>
+    {% for author in pub.authors %}
+    <author>
+      <name>{{ author | xml_escape }}</name>
+    </author>
+    {% endfor %}
+    {% if pub.venue %}<summary>{{ pub.venue | xml_escape }}</summary>{% endif %}
+  </entry>
+  {% endfor %}
+</feed>

@@ -1,0 +1,26 @@
+# Jekyll build output & caches
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby / Bundler
+# (Gemfile.lock is intentionally tracked, for reproducible builds/CI cache)
+vendor/
+.bundle/
+*.gem
+
+# Daily-generated data — fetched fresh by scripts/fetch_*.py on every
+# GitHub Actions run (see .github/workflows/pages.yml) and baked straight
+# into the build artifact, never committed. Run the fetch scripts locally
+# to populate these for local development.
+_data/publications.json
+_data/blog_posts.json
+_data/teaching.json
+
+# OS cruft
+.DS_Store
+node_modules/
+
+# Claude Code local-only session settings
+.claude/settings.local.json

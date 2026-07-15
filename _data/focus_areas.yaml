@@ -1,0 +1,13 @@
+# Source: https://www.helsinki.fi/en/researchgroups/social-computing/projects
+# `slug` is the cross-reference key used by _data/people.yaml
+# (`focus_areas: [slug, ...]` per person) and _data/projects.yaml
+# (`focus_area: slug` per project) — rename it here and update both files
+# to match if you ever rename a focus area.
+- name: Digital society and politics
+  slug: digital-society
+  image: /assets/images/projects/digital-society-and-politics.webp
+  description: Digital technologies are rapidly reshaping our society—transforming how politics operate and where political activity emerges. To understand these changes, we examine how they align with and diverge from established social science concepts, embedding digital transformation within broader theoretical traditions. At the same time, we emphasize that digitalisation is fundamentally a human‑constructed process, shaped by social values, practices, and power dynamics. Our research sits at the intersection of human–computer interaction, technology development, and the social sciences, bridging these domains to better understand how digital systems and societal structures continually co‑evolve.
+- name: Digital and computational methods
+  slug: dcm
+  image: /assets/images/projects/digital-and-computational-methods.webp
+  description: We are at the forefront of computational social science—both in applying computational methods to substantive research questions and in advancing the methodological frontier. Our work focuses on generating meaningful insights from large‑scale data, including social media content, images, and videos. We also investigate methodological foundations, emphasizing the role of theory as well as the importance of validity and reliability in computational analysis. Through this, we aim to establish best practices that help social scientists understand both the opportunities and the risks these methods present.
