@@ -2,10 +2,11 @@
 """Resolve the manually curated, header-grouped course list in
 _data/courses.yaml against the University of Helsinki course catalogue.
 
-Each course entry in _data/courses.yaml needs a `name`, plus either a
-`code` (resolved here to a real link + dates for the soonest upcoming
-offering, falling back to the most recent past one) or a direct `url`
-(used as-is) or neither (rendered as plain text).
+Each course entry in _data/courses.yaml needs either a `code` (resolved
+here to a real link, dates and current official name for the soonest
+upcoming offering, falling back to the most recent past one — any `name`
+given in the yaml is ignored) or a `name` on its own, optionally with a
+direct `url` (used as-is, no lookup).
 
 Writes _data/teaching.json, preserving the header groups. Run daily by
 .github/workflows/pages.yml.
@@ -34,6 +35,7 @@ def study_years():
 def hit_to_offering(hit):
     period = hit.get("activityPeriod", {}) or {}
     return {
+        "name": (hit.get("cuName") or {}).get("en"),
         "start_date": period.get("startDate"),
         "end_date": period.get("endDate"),
         "url": (
@@ -87,12 +89,18 @@ def resolve_code(code):
 
 
 def resolve_course(course):
-    resolved = {"name": course["name"], "code": course.get("code")}
+    # A `name` in courses.yaml is only used for courses without a `code` —
+    # for coded courses the real name is pulled from the API below, since
+    # the university's own official name is more likely to stay current
+    # than a hand-maintained copy.
+    fallback_name = course.get("name") or course.get("code")
+    resolved = {"name": fallback_name, "code": course.get("code")}
 
     if course.get("code"):
         offering = resolve_code(course["code"])
         if offering:
             resolved.update(offering)
+            resolved["name"] = offering["name"] or fallback_name
         else:
             print(f"  warning: no offering found for code {course['code']!r}")
             resolved["url"] = f"https://studies.helsinki.fi/kurssit?searchText={course['code']}"
@@ -111,7 +119,8 @@ def main():
         print(f"Resolving header: {section['header']}")
         courses = []
         for course in section["courses"]:
-            print(f"  {course['name']}" + (f" ({course['code']})" if course.get("code") else ""))
+            label = course.get("name") or course.get("code")
+            print(f"  {label}" + (f" ({course['code']})" if course.get("code") else ""))
             courses.append(resolve_course(course))
         resolved_sections.append({"header": section["header"], "courses": courses})
 

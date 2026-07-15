@@ -2,37 +2,32 @@
 # same headers as
 # https://www.helsinki.fi/en/researchgroups/social-computing/teaching
 #
-# Each course entry needs a `name`, plus either:
+# Each course entry needs either:
 #   - `code`: a University of Helsinki course code (e.g. COS-D421). Looked
 #     up daily by scripts/fetch_teaching.py against the course catalogue to
-#     resolve the current run's real link and dates, written to
-#     _data/teaching.yaml. Do not edit teaching.yaml by hand.
-#   - `url`: a direct link, for courses without a resolvable code (e.g.
-#     taught elsewhere, or not offered this year) — used as-is, no lookup.
-#   - neither: rendered as plain unlinked text.
+#     resolve the current run's real link, dates AND name, written to
+#     _data/teaching.json. Do not edit teaching.json by hand. Any `name`
+#     given here is ignored (the trailing comment just records the name as
+#     of the last time this file was hand-edited, for human reference).
+#   - `name` + `url`: a direct link, for courses without a resolvable code
+#     (e.g. taught elsewhere, or not offered this year) — used as-is, no
+#     lookup.
+#   - `name` alone: rendered as plain unlinked text.
 
 - header: Digital society and politics
   courses:
     - name: Algorithmic systems and Society
       url: https://opetus.mante.li/algorithmicsystems/
-    - name: Politics in Human-Computer Interaction
-      code: COS-D421
+    - code: COS-D421  # Politics in Human-Computer Interaction
 
 - header: Digital and computational methods
   courses:
-    - name: Computational Thinking, Programming and Social sciences
-      code: COS-D430
-    - name: Machine learning for social scientists
-      code: COS-D435
-    - name: Network analysis for social scientists
-      code: COS-D436
-    - name: Interactive systems for social scientists
-      code: COS-R431
-    - name: Collecting digital data for social scientists
-      code: COS-R436
-    - name: (Social) Theory and (Social) Data Science
-      code: COS-D440
-    - name: Large Language Models for Social Sciences
-      code: COS-R444
+    - code: COS-D430  # Computational Thinking, Programming and Social sciences
+    - code: COS-D435  # Machine learning for social scientists
+    - code: COS-D436  # Network analysis for social scientists
+    - code: COS-R431  # Interactive systems for social scientists
+    - code: COS-R436  # Collecting digital data for social scientists
+    - code: COS-D440  # (Social) Theory and (Social) Data Science
+    - code: COS-R444  # Large Language Models for Social Sciences
     - name: Computational Methods in Research on Social, Political, and Economic Issue
       url: https://opiskelijanopas.tuni.fi/fi/tampereen-yliopisto/opintotiedot/opintojaksot/otm-80bfeef0-5307-4823-ad5f-f77f5f911c55
