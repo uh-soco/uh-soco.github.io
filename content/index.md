@@ -11,8 +11,8 @@ nav_order: 0
     <img class="hero__image" src="{{ '/assets/images/home/hero.webp' | relative_url }}" alt="">
     <div class="hero__scrim"></div>
     <div class="hero__text">
-      <h1>Social Computing</h1>
-      <p class="hero__subtitle">Where social sciences and computing meets.</p>
+      <h1>SOCIAL COMPUTING</h1>
+      <p class="hero__subtitle">The meeting point of social sciences and computing.</p>
     </div>
   </section>
 

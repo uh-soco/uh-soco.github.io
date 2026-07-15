@@ -1,8 +1,7 @@
 <header class="site-header">
   <div class="site-header__wrapper">
     <div class="site-header__brand-group">
-      {% include uh-logo.html class="uh-logo--header" %}
-      <a class="site-header__brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      <a class="site-header__brand" href="{{ '/' | relative_url }}">{{ site.title | upcase | escape }}</a>
     </div>
     {% comment %}
       Menu order is set per page via `nav_order` in front matter (lower
@@ -17,7 +16,7 @@
     <nav class="site-nav" aria-label="Main navigation">
       <ds-button
         class="site-nav__mobile-toggle"
-        ds-text="Menu"
+        ds-text="MENU"
         ds-icon="menu"
         ds-icon-only="true"
         ds-icon-aria-label="Menu"
@@ -32,7 +31,7 @@
             <li class="site-nav__item">
               <ds-link
                 ds-href="{{ item.url | relative_url }}"
-                ds-text="{{ item.title | escape }}"
+                ds-text="{{ item.title | upcase | escape }}"
                 ds-variant="standalone"
                 ds-weight="semibold"
                 ds-icon-hidden="true"
@@ -42,7 +41,7 @@
           {% else %}
             <li class="site-nav__item">
               <ds-action-menu
-                ds-button-text="{{ group.name | replace: '-', ' ' | capitalize }}"
+                ds-button-text="{{ group.name | replace: '-', ' ' | upcase }}"
                 ds-button-variant="supplementary"
                 ds-button-colour="black"
                 ds-button-size="small"
@@ -52,7 +51,7 @@
                   {% assign sub_items = group.items | sort: "path" %}
                   {% for item in sub_items %}
                     <ds-action-list-item
-                      ds-label="{{ item.title | escape }}"
+                      ds-label="{{ item.title | upcase | escape }}"
                       data-url="{{ item.url | relative_url }}"
                     ></ds-action-list-item>
                   {% endfor %}

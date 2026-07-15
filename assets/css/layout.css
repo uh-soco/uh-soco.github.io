@@ -87,6 +87,11 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 .uh-logo__mark {
   display: block;
   flex-shrink: 0;
+  /* Base fallback size: an <svg> with only a viewBox (no width/height)
+     collapses to 0×0 as a flex child otherwise. The --header/--footer
+     variants below override this with --uh-logo-size. */
+  width: 2rem;
+  height: 2rem;
 }
 
 .uh-logo__text {
@@ -113,6 +118,10 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
   height: var(--uh-logo-size);
 }
 
+.uh-logo--header .uh-logo__text {
+  display: none;
+}
+
 .site-header__brand {
   font-family: var(--ds-fontFamily-heading);
   font-weight: var(--ds-fontWeight-bold);
@@ -128,6 +137,17 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
  */
 .site-nav__mobile-toggle {
   display: none !important;
+}
+
+.site-nav {
+  /* Open Sans, explicitly — matches site.body but stated here so the nav
+     doesn't silently depend on inheriting it. Uppercase text itself is set
+     in _includes/nav.html (| upcase on the source strings), not via CSS
+     text-transform: the ds-button/ds-link/ds-action-menu components are
+     Stencil "scoped" (not shadow DOM) but still render their label text
+     through their own internal markup, which has its own text-transform
+     rule that wins over anything inherited from here. */
+  font-family: var(--ds-fontFamily-body);
 }
 
 .site-nav__list {

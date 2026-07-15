@@ -25,34 +25,29 @@ layout, grid spacing) and reuses the `--ds-*` custom properties the
 component library already defines at `:root`; it does not redeclare any
 design tokens itself.
 
-The header and footer both carry the University of Helsinki crest
-(`_includes/uh-logo.html`, one shared markup structure styled per context
-via a `class` param). Neither the crest nor a combined logo+wordmark asset
-is part of the public component library, so the crest's SVG path was
-extracted directly from the real site's own `hy-icon-hy-logo` component
-bundle. It's inlined as raw `<svg fill="currentColor">` rather than `<img
-src="...">`, so it can actually pick up this context's CSS color — an
-`<img>`-referenced SVG can't see page CSS, which is why it first rendered
-invisible (black-on-black) in the dark footer.
+The footer carries the University of Helsinki crest
+(`_includes/uh-logo.html`, included from `_includes/footer.html`), just
+the emblem mark with no wordmark. It isn't part of the public component
+library, so its SVG path was extracted directly from the real site's own
+`hy-icon-hy-logo` component bundle. It's inlined as raw `<svg
+fill="currentColor">` rather than `<img src="...">`, so it can actually
+pick up this context's CSS color — an `<img>`-referenced SVG can't see
+page CSS. `.uh-logo__mark` in `assets/css/layout.css` has a 2rem fallback
+size so the crest never silently collapses to 0×0 (an `<svg>` with only a
+`viewBox`, no `width`/`height`, does that as a flex child) if it isn't
+otherwise sized.
 
 Checked against the official rules at
-https://www.helsinki.fi/en/brand-book/brand-and-logo: the emblem is
+https://www.helsinki.fi/en/brand-book/brand-and-logo: the emblem should be
 "almost exclusively" paired with the "UNIVERSITY OF HELSINKI" wordmark,
 never shown alone, and only ever black on light surfaces or white
-(negative) on dark/photo surfaces. The footer (`uh-logo--footer`) follows
-this: crest above a single-line wordmark, centred (the brand book's
-"basic format" for the vertical arrangement), pure white on the black
-background, gap between crest and wordmark sized to approximate the
-brand book's "width of one square in the emblem" rule (the emblem's
-corner squares are 96 of 1000 viewBox units, ~9.6%, see
-`--uh-logo-size`/`calc()` in `assets/css/layout.css`).
-
-The header (`uh-logo--header`) is a deliberate departure from the brand
-book, by request: icon-only (no wordmark) and colored `rgb(229, 5, 58)`
-rather than black/white/silver. This isn't a brand-book-compliant
-presentation of the official mark — it's a stylistic choice for this
-site's own nav bar, kept in mind if the crest ever needs to represent the
-University in an official capacity elsewhere on the site.
+(negative) on dark/photo surfaces. The current markup shows the emblem
+alone (white, on the black footer), which departs from that "never shown
+alone" rule — `assets/css/layout.css` still has `.uh-logo--header`/
+`.uh-logo--footer` rules built for a wordmark-plus-emblem lockup (the
+brand book's centred "basic format"), but `_includes/uh-logo.html` no
+longer renders any wordmark markup for those rules to size or position,
+so they're currently inert. The header doesn't show any UH logo at all.
 
 ## Structure
 
@@ -75,6 +70,19 @@ edit that field to reorder; pages without it sort last):
   page, see below), but the mechanism is there if a section ever needs it.
   `jekyll-sitemap` is enabled so pages reachable only from inside a
   JS-driven popup would still stay crawlable.
+
+Nav text (link labels, the "MENU" mobile toggle, the brand name) is
+uppercased with Liquid's `| upcase` on the source string in
+`_includes/nav.html`, not CSS `text-transform`. The `ds-button`/`ds-link`/
+`ds-action-menu` components are Stencil "scoped" components, not real
+shadow DOM (`element.shadowRoot` is `null`), but they still render their
+label text through their own internal markup, which has its own
+`text-transform` that wins over anything inherited from an ancestor — so
+forcing the actual case at the template level is the only reliable fix.
+The nav also sets `font-family: var(--ds-fontFamily-body)` explicitly on
+`.site-nav` (Open Sans) — this one *is* just inheritance, already true by
+default since `body` sets the same, but stated so the nav doesn't silently
+depend on that.
 
 ### Data
 
