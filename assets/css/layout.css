@@ -101,26 +101,16 @@ p { margin: 0 0 var(--ds-spacing-small) 0; }
 }
 
 .uh-logo--header {
-  color: var(--ds-textColor-default);
+  /* Icon-only in the header, by request — coloured rather than the brand
+     book's black/white/silver, so this is a deliberate departure from
+     strict brand-book usage for this context. */
+  color: rgb(229, 5, 58);
   --uh-logo-size: 28px;
-  gap: calc(var(--uh-logo-size) * 0.096);
 }
 
 .uh-logo--header .uh-logo__mark {
   width: var(--uh-logo-size);
   height: var(--uh-logo-size);
-}
-
-.uh-logo--header .uh-logo__text {
-  flex-direction: column;
-  line-height: 1.1;
-  font-size: var(--ds-fontSize-12);
-}
-
-@media (max-width: 30rem) {
-  .uh-logo--header .uh-logo__text {
-    display: none;
-  }
 }
 
 .site-header__brand {

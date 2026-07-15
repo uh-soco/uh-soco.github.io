@@ -25,36 +25,34 @@ layout, grid spacing) and reuses the `--ds-*` custom properties the
 component library already defines at `:root`; it does not redeclare any
 design tokens itself.
 
-The header and footer both carry the University of Helsinki crest +
-"UNIVERSITY OF HELSINKI" wordmark, linking to helsinki.fi
+The header and footer both carry the University of Helsinki crest
 (`_includes/uh-logo.html`, one shared markup structure styled per context
-via a `class` param — modeled on the real lockup at
-https://www.helsinki.fi/en). In the header (`uh-logo--header`) the crest
-sits left of the wordmark stacked over two lines ("UNIVERSITY" /
-"OF HELSINKI"), matching the real site; in the footer (`uh-logo--footer`)
-the crest sits above a single-line wordmark, roughly sized to the height of
-the footer's three text lines. Neither the crest nor a combined
-logo+wordmark asset is part of the public component library, so the
-crest's SVG path was extracted directly from the real site's own
-`hy-icon-hy-logo` component bundle. It's inlined as raw `<svg
-fill="currentColor">` rather than `<img src="...">`, so it can actually
-pick up this context's CSS color — an `<img>`-referenced SVG can't see page
-CSS, which is why it first rendered invisible (black-on-black) in the dark
-footer.
+via a `class` param). Neither the crest nor a combined logo+wordmark asset
+is part of the public component library, so the crest's SVG path was
+extracted directly from the real site's own `hy-icon-hy-logo` component
+bundle. It's inlined as raw `<svg fill="currentColor">` rather than `<img
+src="...">`, so it can actually pick up this context's CSS color — an
+`<img>`-referenced SVG can't see page CSS, which is why it first rendered
+invisible (black-on-black) in the dark footer.
 
 Checked against the official rules at
-https://www.helsinki.fi/en/brand-book/brand-and-logo: emblem colour is
-black on light surfaces / white (negative) on dark or photo surfaces only,
-never any other colour or used alone without the wordmark; the vertical
-arrangement (wordmark centred under the emblem) is the "basic format" —
-used here in the footer; the horizontal arrangement (emblem beside the
-wordmark) is explicitly the sanctioned exception "when there is
-insufficient space for a vertical flame logo" — used here in the header
-nav bar, which is exactly that situation. The brand book also specifies
-the emblem-to-wordmark gap as "the width of one of the squares in the
-emblem"; `.uh-logo`'s `--uh-logo-size`/gap `calc()` approximates that from
-the emblem's actual square proportions in the SVG path (corner squares are
-96 of 1000 viewBox units, ~9.6%).
+https://www.helsinki.fi/en/brand-book/brand-and-logo: the emblem is
+"almost exclusively" paired with the "UNIVERSITY OF HELSINKI" wordmark,
+never shown alone, and only ever black on light surfaces or white
+(negative) on dark/photo surfaces. The footer (`uh-logo--footer`) follows
+this: crest above a single-line wordmark, centred (the brand book's
+"basic format" for the vertical arrangement), pure white on the black
+background, gap between crest and wordmark sized to approximate the
+brand book's "width of one square in the emblem" rule (the emblem's
+corner squares are 96 of 1000 viewBox units, ~9.6%, see
+`--uh-logo-size`/`calc()` in `assets/css/layout.css`).
+
+The header (`uh-logo--header`) is a deliberate departure from the brand
+book, by request: icon-only (no wordmark) and colored `rgb(229, 5, 58)`
+rather than black/white/silver. This isn't a brand-book-compliant
+presentation of the official mark — it's a stylistic choice for this
+site's own nav bar, kept in mind if the crest ever needs to represent the
+University in an official capacity elsewhere on the site.
 
 ## Structure
 
