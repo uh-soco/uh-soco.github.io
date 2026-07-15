@@ -123,15 +123,16 @@ depend on that.
   straight into the page to make editing a method (or adding a new one) a
   single markdown edit instead of touching two files.
 - `_data/courses.yaml` — the manually curated, editable source for the
-  Teaching page: a list of headers (currently "The digital as an object for
-  social scientific research" and "Computational methods for social
-  sciences", matching
+  Teaching page: a list of headers (currently "Digital society and
+  politics" and "Digital and computational methods", matching
   https://www.helsinki.fi/en/researchgroups/social-computing/teaching), each
-  with a list of courses. A course needs a `name`, plus either a `code`
-  (University of Helsinki course code, e.g. `COS-D421` — resolved daily
-  against the course catalogue) or a direct `url` (used as-is, no lookup)
-  or neither (rendered as plain text — most of the source page's course
-  names don't map to a code we know).
+  with a list of courses. A course needs either a `code` (University of
+  Helsinki course code, e.g. `COS-D421` — resolved daily against the course
+  catalogue for its real link, dates, *and* current official name; any
+  `name` given alongside a `code` is ignored, kept only as a trailing
+  comment for human reference when hand-editing) or a `name` on its own,
+  optionally with a direct `url` (used as-is, no lookup — most of the
+  source page's course names don't map to a code we know).
 - `_data/teaching.json` — generated daily by `scripts/fetch_teaching.py`
   (JSON, like `publications.json` and `blog_posts.json`, for consistency —
   `_data/courses.yaml` is the only hand-edited course data), which resolves
@@ -140,7 +141,11 @@ depend on that.
   falling back to the most recent past one) while preserving the
   header groups. Do not edit by hand — edit `_data/courses.yaml` instead.
   Note: that API wraps course codes in stray `␟` separator characters
-  (e.g. `␟COS-D421␟`), so the lookup strips those before comparing.
+  (e.g. `␟COS-D421␟`), so the lookup strips those before comparing. The
+  Teaching page itself (`content/teaching.md`) renders this through
+  `_includes/course-list.html`, which also decides whether to label each
+  course "next teaching time" or "last teaching time" by comparing
+  today's date against the resolved `start_date`.
 - `_data/publications.json` — a single JSON array, generated daily by
   `scripts/fetch_publications.py`, which fetches from the
   [ORCID public API](https://pub.orcid.org) for every current member with an
