@@ -17,10 +17,11 @@ vendor/
 _data/publications.json
 _data/blog_posts.json
 _data/teaching.json
+_data/cowork.json
 
 # OS cruft
 .DS_Store
 node_modules/
 
-# Claude Code local-only session settings
-.claude/settings.local.json
+# Claude Code local config — machine/session-specific, not project source
+.claude/
