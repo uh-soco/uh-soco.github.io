@@ -25,3 +25,6 @@ node_modules/
 
 # Claude Code local config — machine/session-specific, not project source
 .claude/
+
+# Local secrets (e.g. NOTION_TOKEN for scripts/fetch_cowork.py), never committed
+.env

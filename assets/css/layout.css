@@ -546,6 +546,21 @@ main.wrapper {
   margin-top: var(--ds-spacing-small);
 }
 
+/* Co-working opportunities (content/cowork.md) */
+.cowork-list {
+  list-style: none;
+  margin: 0 0 var(--ds-spacing-medium) 0;
+  padding: 0;
+}
+
+.cowork-list li + li {
+  margin-top: var(--ds-spacing-2xSmall);
+}
+
+.cowork-list .badge-row {
+  margin-top: var(--ds-spacing-2xSmall);
+}
+
 .course-code {
   font-family: monospace;
   color: var(--ds-palette-black-70);

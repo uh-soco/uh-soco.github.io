@@ -1,9 +1,10 @@
 name: Build and deploy site
 
-# Fetches publications, blog posts and teaching data fresh on every run
-# (push or the daily schedule) and bakes them straight into the built site.
-# Nothing gets committed back to the repo — the generated data only ever
-# lives in this run's Pages deployment artifact.
+# Fetches publications, blog posts, teaching data and co-working
+# opportunities fresh on every run (push or the daily schedule) and bakes
+# them straight into the built site. Nothing gets committed back to the
+# repo — the generated data only ever lives in this run's Pages deployment
+# artifact.
 
 on:
   push:
@@ -48,6 +49,11 @@ jobs:
 
       - name: Fetch teaching data
         run: python scripts/fetch_teaching.py
+
+      - name: Fetch co-working opportunities from Notion
+        run: python scripts/fetch_cowork.py
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

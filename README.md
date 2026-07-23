@@ -169,6 +169,20 @@ depend on that.
   itself just points at an internal Drupal block id). Do not edit by hand.
   Powers the "Recent blog posts" column on `content/index.md` (5 most
   recent).
+- `_data/cowork.json` — a single JSON array, generated daily by
+  `scripts/fetch_cowork.py` from a private Notion database
+  (https://www.notion.so/matnel/7f67eaa07e10418497bb03da9627d632) where
+  Matti tracks individual research project and thesis topic ideas. Only
+  rows with the "Available" checkbox on are included; each entry carries
+  its Notion "Multi-select" categories (`"Small project"` and/or
+  `"Thesis topic"`). Reading the database needs a Notion integration token
+  with the database shared to it, set as the `NOTION_TOKEN` secret/env var
+  — without it the script writes an empty list rather than failing the
+  build. Do not edit by hand. Powers `content/cowork.md` (`/work-with-us`),
+  which filters this one list into its "Individual research project" and
+  "Master thesis supervision" sections via `_includes/cowork-list.html`,
+  rendering each topic as a `<ds-accordion>` (header = title, content =
+  description plus work-area/paid-position/Finnish-skill badges).
 
 `content/index.md` otherwise mirrors
 https://www.helsinki.fi/en/researchgroups/social-computing directly: the
@@ -193,8 +207,11 @@ library, so this is a hand-styled equivalent, not a 1:1 copy.
 
 `.github/workflows/pages.yml` is the only workflow. On every push to `main`,
 on a daily schedule (04:00 UTC), and on manual dispatch, it: fetches
-publications, blog posts and teaching data fresh into the checkout, builds
-the Jekyll site with that data, and deploys the result to GitHub Pages.
+publications, blog posts, teaching data and co-working opportunities fresh
+into the checkout, builds the Jekyll site with that data, and deploys the
+result to GitHub Pages. The `NOTION_TOKEN` secret (see `_data/cowork.json`
+above) needs to be set in the repo's Actions secrets for the co-working
+fetch to return real data; it fails soft (empty list) if missing.
 
 The fetched data is **never committed back to the repo** — it only ever
 lives in that run's build output, uploaded as the Pages deployment
@@ -214,9 +231,22 @@ bundle exec jekyll serve
 To refresh the generated data by hand:
 
 ```sh
-pip install requests pyyaml
+pip install requests pyyaml python-dotenv
 python scripts/fetch_publications.py
 python scripts/fetch_blog_posts.py
 python scripts/fetch_teaching.py
+python scripts/fetch_cowork.py  # needs a Notion integration token — see below
 python scripts/download_people_images.py  # after editing image URLs in _data/people.yaml
 ```
+
+`fetch_cowork.py` needs `NOTION_TOKEN` set. Rather than exporting it by hand every
+time, drop it in a `.env` file at the repo root (already gitignored, never
+committed):
+
+```sh
+echo "NOTION_TOKEN=<your integration token>" > .env
+```
+
+`python-dotenv` (installed above) loads it automatically; if it's not
+installed, the script just skips loading `.env` and falls back to
+whatever's already in the environment.

@@ -1,0 +1,20 @@
+<ul class="cowork-list">
+{% for topic in include.topics %}
+  <li>
+    <ds-accordion ds-heading-level="3">
+      <span slot="header">{{ topic.title | escape }}</span>
+      <div slot="content">
+        <p>{{ topic.description | escape }}</p>
+        {% if topic.work_area.size > 0 or topic.paid_position or topic.finnish_skill_required %}
+        <span class="badge-row">
+          {% for area in topic.work_area %}<ds-badge ds-text="{{ area | escape }}" ds-variant="default"></ds-badge>{% endfor %}
+          {% if topic.finnish_skill_required %}<ds-badge ds-text="Finnish skill required" ds-variant="default"></ds-badge>{% endif %}
+        </span>
+        {% endif %}
+      </div>
+    </ds-accordion>
+  </li>
+{% else %}
+  <li>{{ include.empty_message | default: "No open topics at the moment — check back later." }}</li>
+{% endfor %}
+</ul>
