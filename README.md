@@ -169,12 +169,21 @@ depend on that.
   at `feed/publications.xml` (`/feed/publications.xml` — a plain Liquid
   template over `site.data.publications`, not a Jekyll collection, since
   there's no per-publication page anymore).
-- `_data/blog_posts.json` — generated daily by `scripts/fetch_blog_posts.py`
-  from the group's Substack RSS feed
-  (https://sociallycompute.substack.com/feed — this is the actual feed
-  behind "Recent blog posts" on the source homepage; found by inspecting the
-  network requests the live site's blog widget makes, since the widget
-  itself just points at an internal Drupal block id). Do not edit by hand.
+- `_data/feeds.yaml` — a flat, hand-maintained list of RSS/Atom feed URLs.
+  Add a URL here to have that feed's posts show up in "Recent blog posts"
+  on `content/index.md` — no code changes needed. Currently just the
+  group's Substack feed (https://sociallycompute.substack.com/feed — this
+  is the actual feed behind "Recent blog posts" on the source homepage;
+  found by inspecting the network requests the live site's blog widget
+  makes, since the widget itself just points at an internal Drupal block
+  id).
+- `_data/blog_posts.json` — generated daily by `scripts/fetch_blog_posts.py`,
+  which fetches every feed in `_data/feeds.yaml`, merges all their entries,
+  and keeps only the 10 newest across all feeds combined (sorted by date,
+  not per-feed — a feed that publishes less often never has a genuinely
+  newer post wrongly dropped by a per-feed cap). Each feed is fetched
+  independently and soft-fails to no posts (with a warning) if it can't be
+  reached, rather than taking the others down with it. Do not edit by hand.
   Powers the "Recent blog posts" column on `content/index.md` (5 most
   recent).
 - `_data/cowork.json` — a single JSON array, generated daily by
