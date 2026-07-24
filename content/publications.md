@@ -5,8 +5,10 @@ permalink: /publications/
 nav_order: 4
 ---
 
+Highlighted names indicate research group members among the listed co-authors.
+
 {% assign publications = site.data.publications | sort: "date" | reverse %}
-{% assign page_size = 25 %}
+{% assign page_size = 15 %}
 
 <ul class="publication-list" id="publication-list">
 {% for pub in publications %}
