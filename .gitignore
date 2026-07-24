@@ -10,14 +10,14 @@ vendor/
 .bundle/
 *.gem
 
+# Python
+__pycache__/
+
 # Daily-generated data — fetched fresh by scripts/fetch_*.py on every
 # GitHub Actions run (see .github/workflows/pages.yml) and baked straight
 # into the build artifact, never committed. Run the fetch scripts locally
 # to populate these for local development.
-_data/publications.json
-_data/blog_posts.json
-_data/teaching.json
-_data/cowork.json
+_data/*.json
 
 # OS cruft
 .DS_Store
