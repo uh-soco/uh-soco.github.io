@@ -95,7 +95,7 @@ def main():
             topics = []
 
     with open(OUTPUT_PATH, "w") as f:
-        json.dump(topics, f, indent=2, ensure_ascii=False)
+        json.dump(topics, f, ensure_ascii=False)
         f.write("\n")
 
     print(f"Wrote {len(topics)} co-working topics to {OUTPUT_PATH}")

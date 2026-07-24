@@ -46,9 +46,7 @@ CROSSREF_HEADERS = {
 SEMANTIC_SCHOLAR_BATCH_URL = "https://api.semanticscholar.org/graph/v1/paper/batch"
 TRANSLIT = str.maketrans("äöåÄÖÅ", "aoaAOA")
 DOI_PREFIX_RE = re.compile(r"^(https?://)?(dx\.)?doi\.org/|^doi:", re.IGNORECASE)
-TAG_RE = re.compile(r"<[^>]+>")
-ABSTRACT_LABEL_RE = re.compile(r"^\s*abstract\s*[:.\-]?\s*", re.IGNORECASE)
-WHITESPACE_RE = re.compile(r"\s+")
+
 
 
 def slugify(text):
@@ -56,6 +54,9 @@ def slugify(text):
     slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
     return slug[:80] or "untitled"
 
+TAG_RE = re.compile(r"<[^>]+>")
+ABSTRACT_LABEL_RE = re.compile(r"^\s*abstract\s*[:.\-]?\s*", re.IGNORECASE)
+WHITESPACE_RE = re.compile(r"\s+")
 
 def clean_abstract(raw):
     """Crossref abstracts come wrapped in JATS-ish tags, e.g.
