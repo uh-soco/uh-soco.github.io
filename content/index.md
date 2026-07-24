@@ -45,7 +45,7 @@ nav_order: 0
         </li>
       {% endfor %}
       </ol>
-      <p><ds-link ds-href="https://sociallycompute.substack.com" ds-text="All posts" ds-icon="arrow-outward"></ds-link></p>
+      <p><ds-link-with-arrow ds-href="https://sociallycompute.substack.com" ds-text="All posts"></ds-link-with-arrow></p>
     </div>
 
     <div class="home-column">
@@ -60,7 +60,7 @@ nav_order: 0
         </li>
       {% endfor %}
       </ul>
-      <p><ds-link ds-href="{{ '/publications/' | relative_url }}" ds-text="All publications" ds-icon="arrow-outward"></ds-link></p>
+      <p><ds-link-with-arrow ds-href="{{ '/publications/' | relative_url }}" ds-text="All publications"></ds-link-with-arrow></p>
     </div>
   </ds-grid>
 </div>
