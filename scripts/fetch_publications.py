@@ -17,6 +17,14 @@ A paper co-authored by more than one group member is written once, with an
 Deduplicated by DOI, falling back to a slugified title for the rare work
 without one.
 
+Each publication with a DOI also gets an `abstract` (full text, untruncated —
+display-time truncation is the templates' job), pulled from the same Crossref
+lookup used for author matching where available. Crossref only has an
+abstract for roughly 60% of DOIs in practice, so any DOI it misses is
+retried in one batched Semantic Scholar Graph API call. A publication with no
+DOI, or where neither source has an abstract, simply has no `abstract` key —
+same soft-fail spirit as the rest of this script.
+
 Run daily by .github/workflows/pages.yml.
 """
 import json
@@ -35,14 +43,32 @@ CROSSREF_HEADERS = {
     "Accept": "application/json",
     "User-Agent": "social-computing-www-bot (mailto:matti.nelimarkka@helsinki.fi)",
 }
+SEMANTIC_SCHOLAR_BATCH_URL = "https://api.semanticscholar.org/graph/v1/paper/batch"
 TRANSLIT = str.maketrans("äöåÄÖÅ", "aoaAOA")
 DOI_PREFIX_RE = re.compile(r"^(https?://)?(dx\.)?doi\.org/|^doi:", re.IGNORECASE)
+TAG_RE = re.compile(r"<[^>]+>")
+ABSTRACT_LABEL_RE = re.compile(r"^\s*abstract\s*[:.\-]?\s*", re.IGNORECASE)
+WHITESPACE_RE = re.compile(r"\s+")
 
 
 def slugify(text):
     text = text.translate(TRANSLIT)
     slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
     return slug[:80] or "untitled"
+
+
+def clean_abstract(raw):
+    """Crossref abstracts come wrapped in JATS-ish tags, e.g.
+    "<jats:title>Abstract</jats:title><jats:p>...</jats:p>" — strip the
+    tags, drop the leftover "Abstract" label, and collapse the whitespace
+    that stripping tags leaves behind. Semantic Scholar abstracts are
+    already plain text, but running them through this too is harmless."""
+    if not raw:
+        return None
+    text = TAG_RE.sub(" ", raw)
+    text = ABSTRACT_LABEL_RE.sub("", text)
+    text = WHITESPACE_RE.sub(" ", text).strip()
+    return text or None
 
 
 def load_people():
@@ -85,14 +111,40 @@ def match_authors_to_roster(crossref_authors, roster):
     return matched
 
 
-def fetch_crossref_authors(doi):
+def fetch_crossref_work(doi):
     try:
         resp = requests.get(f"https://api.crossref.org/works/{doi}", headers=CROSSREF_HEADERS, timeout=30)
         resp.raise_for_status()
     except requests.RequestException as exc:
         print(f"  warning: Crossref lookup failed for {doi!r}: {exc}")
         return None
-    return resp.json().get("message", {}).get("author")
+    return resp.json().get("message", {})
+
+
+def fetch_semantic_scholar_abstracts(dois):
+    """One batched lookup for every DOI Crossref didn't have an abstract
+    for — the batch endpoint takes up to 500 IDs per call, comfortably
+    covering this group's whole publication list in a single request. A
+    failure here just means no fallback abstracts this run, not a broken
+    build (same soft-fail spirit as the rest of this script)."""
+    if not dois:
+        return {}
+    try:
+        resp = requests.post(
+            SEMANTIC_SCHOLAR_BATCH_URL,
+            params={"fields": "abstract"},
+            json={"ids": [f"DOI:{doi}" for doi in dois]},
+            headers=HEADERS,
+            timeout=30,
+        )
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        print(f"  warning: Semantic Scholar batch lookup failed: {exc}")
+        return {}
+    # Response is positionally aligned with the request `ids`; unmatched
+    # DOIs come back as `null`, which is a normal "not available" — not an
+    # error worth warning about.
+    return {doi: paper["abstract"] for doi, paper in zip(dois, resp.json()) if paper and paper.get("abstract")}
 
 
 def external_id(external_ids, id_type):
@@ -158,12 +210,21 @@ def main():
     for pub in publications.values():
         if not pub["doi"]:
             continue
-        crossref_authors = fetch_crossref_authors(pub["doi"])
-        if not crossref_authors:
+        work = fetch_crossref_work(pub["doi"])
+        if not work:
             continue
-        roster_matches = match_authors_to_roster(crossref_authors, roster)
+        roster_matches = match_authors_to_roster(work.get("author") or [], roster)
         if roster_matches:
             pub["authors"] = roster_matches
+        pub["abstract"] = clean_abstract(work.get("abstract"))
+
+    missing_dois = [pub["doi"] for pub in publications.values() if pub["doi"] and not pub.get("abstract")]
+    if missing_dois:
+        print(f"Looking up {len(missing_dois)} missing abstracts on Semantic Scholar")
+        fallback_abstracts = fetch_semantic_scholar_abstracts(missing_dois)
+        for pub in publications.values():
+            if pub["doi"] in fallback_abstracts:
+                pub["abstract"] = clean_abstract(fallback_abstracts[pub["doi"]])
 
     result = []
     for pub in publications.values():

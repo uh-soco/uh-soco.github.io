@@ -152,15 +152,23 @@ depend on that.
   `orcid` in `_data/people.yaml`. A paper co-authored by more than one group
   member is written once — deduplicated by DOI (falling back to a slugified
   title for the rare work without one) — with an `authors` list naming
-  every group member found on it. Do not edit by hand. Powers the "Recent
-  publications" list on `content/index.md` (10 most recent, sorted by full
-  publication date where ORCID provides one; format:
-  "Title: Venue (Year) [Author] [Author]"), `content/publications.md` (all
-  of them, same format, 25 at a time with a "Load more" button — see
-  `assets/js/load-more.js`), and the hand-rolled RSS feed at `feed/publications.xml`
-  (`/feed/publications.xml` — a plain Liquid template over
-  `site.data.publications`, not a Jekyll collection, since there's no
-  per-publication page anymore).
+  every group member found on it. Each publication with a DOI also gets a
+  full, untruncated `abstract`: pulled from the same Crossref lookup already
+  used for author matching where available (~60% of DOIs in practice, tags
+  stripped), falling back to one batched
+  [Semantic Scholar Graph API](https://api.semanticscholar.org) lookup for
+  any DOI Crossref missed. No DOI, or neither source has an abstract, means
+  no `abstract` key — same soft-fail spirit as `blog_posts.json`. Do not edit
+  by hand. Powers the "Recent publications" list on `content/index.md` (5
+  most recent, sorted by full publication date where ORCID provides one;
+  format: "Title: Venue (Year) [Author] [Author]", plus an abstract teaser
+  — `{{ pub.abstract | truncatewords: 30 }}` — styled to match the "Recent
+  blog posts" column right next to it), `content/publications.md` (all of
+  them, same format *without* the abstract teaser, 25 at a time with a "Load
+  more" button — see `assets/js/load-more.js`), and the hand-rolled RSS feed
+  at `feed/publications.xml` (`/feed/publications.xml` — a plain Liquid
+  template over `site.data.publications`, not a Jekyll collection, since
+  there's no per-publication page anymore).
 - `_data/blog_posts.json` — generated daily by `scripts/fetch_blog_posts.py`
   from the group's Substack RSS feed
   (https://sociallycompute.substack.com/feed — this is the actual feed

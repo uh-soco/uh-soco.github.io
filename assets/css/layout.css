@@ -382,6 +382,23 @@ main.wrapper {
   margin-top: var(--ds-spacing-small);
 }
 
+/* On the homepage, publications mirror the blog list's exact look — no
+   bullets, a divider line between entries — rather than the bulleted,
+   undivided style `.publication-list` otherwise has on /publications/. */
+.home-column .publication-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.home-column .publication-list li {
+  padding: var(--ds-spacing-small) 0;
+  border-bottom: var(--ds-borderWidth-hairline) solid var(--ds-palette-black-10);
+}
+
+.home-column .publication-list li:last-child {
+  border-bottom: none;
+}
+
 .blog-list {
   list-style: none;
   margin: 0;
@@ -397,7 +414,8 @@ main.wrapper {
   border-bottom: none;
 }
 
-.blog-list p {
+.blog-list p,
+.publication-list p {
   margin: var(--ds-spacing-3xSmall) 0 0 0;
   font-size: var(--ds-fontSize-14);
   color: var(--ds-palette-black-70);
